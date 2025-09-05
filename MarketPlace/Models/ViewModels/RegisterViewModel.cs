@@ -19,5 +19,8 @@ namespace MarketPlace.Models.ViewModels
         [Compare("Password", ErrorMessage = "Password and Confirm Password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Phone]
+        [Required(ErrorMessage = "Phone number is required")]
+        public string PhoneNumber { get; set; }
     }
 }

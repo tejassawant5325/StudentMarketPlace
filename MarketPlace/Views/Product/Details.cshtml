@@ -1,0 +1,55 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="container mt-5">
+    <div class="row align-items-start">
+        <!-- Left side: Product Image -->
+        <div class="col-md-6 text-center">
+            <img src="@Url.Content("~/images/" + @Model.ImageUrl)"
+                 alt="@Model.Name"
+                 class="img-fluid rounded shadow"
+                 style="max-height: 450px; object-fit: contain;" />
+        </div>
+
+        <!-- Right side: Product Details -->
+        <div class="col-md-6">
+            <h1 class="fw-bold mb-3">@Model.Name</h1>
+
+            <div class="mb-3">
+                <span class="h4 text-success fw-semibold">
+                    @Model.Price.ToString("C")
+                </span>
+            </div>
+
+            <div class="mb-3">
+                <span class="badge bg-success
+                    fs-6 px-3 py-2">
+                    @Model.Status
+                </span>
+            </div>
+
+            <div class="mb-3">
+                <h5 class="fw-semibold">Description</h5>
+                <p class="text-muted" style="line-height:1.6;">
+                    @Model.Description
+                </p>
+            </div>
+
+            <div class="mb-3">
+                <strong>Posted On:</strong>
+                <span class="text-secondary">@Model.DatePosted.ToShortDateString()</span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex gap-3 mt-4">
+                <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary px-4">Back</a>
+                <a asp-action="Buy" asp-route-id="@Model.Id" class="btn btn-primary px-4">
+                    Buy
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

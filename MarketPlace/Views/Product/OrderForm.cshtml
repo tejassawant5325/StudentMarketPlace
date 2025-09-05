@@ -1,0 +1,40 @@
+﻿@model MarketPlace.Data.Entities.Product
+
+<h2>Confirm Your Order</h2>
+
+<div class="card mb-3" style="max-width: 500px;">
+    <img src="@Model.ImageUrl" class="card-img-top" alt="@Model.Name" />
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">@Model.Description</p>
+        <p><strong>Price:</strong> ₹@Model.Price</p>
+    </div>
+</div>
+
+<form>
+    <div class="form-group mb-3">
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="shippingAddress">Shipping Address</label>
+        <textarea id="shippingAddress" name="shippingAddress" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="contactNumber">Contact Number</label>
+        <input type="text" id="contactNumber" name="contactNumber" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="paymentMethod">Payment Method</label>
+        <select id="paymentMethod" name="paymentMethod" class="form-control">
+            <option>Cash on Delivery</option>
+            <option>UPI</option>
+            <option>Credit/Debit Card</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Confirm Order</button>
+</form>

@@ -8,40 +8,65 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MarketPlace.styles.css" asp-append-version="true" />
+    <style>
+        .navbar-nav .nav-link {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+    </style>
 </head>
 <body>
     <header>
+
         @if (signInManager.IsSignedIn(User))
         {
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
                 <div class="container-fluid">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Student Market Place</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Market Place</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-sm-0">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Product" asp-action="Index">Products</a>
-                                @if (signInManager.IsSignedIn(User))
-                                {
-                                    <form asp-action="Logout" asp-controller="Account">
-                                <li class="nav-item mt-1">
-                                    <button type="submit" class="btn btn-primary">Logout @User.Identity.Name</button>
-                                </li>
-                                </form>
-                            }
-                            else
-                            {
+                                <a class="nav-link text-light" asp-controller="Product" asp-action="Index">Products</a>
+                            </li>
+
+                            <!-- Become a Seller Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" id="sellerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Become a Seller
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="sellerDropdown">
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Product" asp-action="AddProduct">Sell Product</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Product" asp-action="ManageProduct">Manage Products</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <form class="d-flex" asp-action="Logout" asp-controller="Account" method="post">
+                                <button type="submit" class="btn btn-primary">Logout @User.Identity.Name</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
                                 <li class="nav-item">
                                     <a asp-controller="Account" asp-action="Register" class="nav-link">Register</a>
                                 </li>
                                 <li class="nav-item">
                                     <a asp-controller="Account" asp-action="Login" class="nav-link">Login</a>
                                 </li>
-                            }
-                        </ul>
+                            </ul>
+                        }
                     </div>
                 </div>
             </nav>
@@ -53,11 +78,12 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - MarketPlace - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer bg-dark text-light">
+        <div class="container text-center">
+            &copy; @DateTime.Now.Year - Market Place
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -10,5 +10,8 @@
         public string Status { get; set; } = string.Empty;
         public DateTime DatePosted { get; set; }
         public int Category { get; set; }
+        public string? AddedBy { get; set; }
+        public DateTime ModifiedDate { get; set; }
+        public string? ModifiedBy { get; set; }
     }
 }

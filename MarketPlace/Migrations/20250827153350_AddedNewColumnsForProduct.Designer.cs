@@ -4,6 +4,7 @@ using MarketPlace.Data.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketPlace.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250827153350_AddedNewColumnsForProduct")]
+    partial class AddedNewColumnsForProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,7 +141,7 @@ namespace MarketPlace.Migrations
                         {
                             Id = 1,
                             Category = 1,
-                            DatePosted = new DateTime(2025, 9, 3, 7, 53, 38, 14, DateTimeKind.Utc).AddTicks(2620),
+                            DatePosted = new DateTime(2025, 8, 27, 15, 33, 49, 628, DateTimeKind.Utc).AddTicks(9996),
                             Description = "Powerful laptop with 16GB RAM",
                             ImageUrl = "images/laptop.png",
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -150,7 +153,7 @@ namespace MarketPlace.Migrations
                         {
                             Id = 2,
                             Category = 2,
-                            DatePosted = new DateTime(2025, 9, 3, 7, 53, 38, 14, DateTimeKind.Utc).AddTicks(2629),
+                            DatePosted = new DateTime(2025, 8, 27, 15, 33, 49, 629, DateTimeKind.Utc).AddTicks(5),
                             Description = "Calculus textbook for university",
                             ImageUrl = "images/textbook.png",
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -162,7 +165,7 @@ namespace MarketPlace.Migrations
                         {
                             Id = 3,
                             Category = 3,
-                            DatePosted = new DateTime(2025, 9, 3, 7, 53, 38, 14, DateTimeKind.Utc).AddTicks(2635),
+                            DatePosted = new DateTime(2025, 8, 27, 15, 33, 49, 629, DateTimeKind.Utc).AddTicks(11),
                             Description = "Wireless noise-cancelling headphones",
                             ImageUrl = "images/headphones.png",
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -174,7 +177,7 @@ namespace MarketPlace.Migrations
                         {
                             Id = 4,
                             Category = 1,
-                            DatePosted = new DateTime(2025, 9, 3, 7, 53, 38, 14, DateTimeKind.Utc).AddTicks(2640),
+                            DatePosted = new DateTime(2025, 8, 27, 15, 33, 49, 629, DateTimeKind.Utc).AddTicks(16),
                             Description = "High-performance laptop with RTX graphics",
                             ImageUrl = "images/laptop.png",
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -186,7 +189,7 @@ namespace MarketPlace.Migrations
                         {
                             Id = 5,
                             Category = 2,
-                            DatePosted = new DateTime(2025, 9, 3, 7, 53, 38, 14, DateTimeKind.Utc).AddTicks(2644),
+                            DatePosted = new DateTime(2025, 8, 27, 15, 33, 49, 629, DateTimeKind.Utc).AddTicks(21),
                             Description = "Latest 5G smartphone with OLED display",
                             ImageUrl = "images/smartphone.png",
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -198,7 +201,7 @@ namespace MarketPlace.Migrations
                         {
                             Id = 6,
                             Category = 3,
-                            DatePosted = new DateTime(2025, 9, 3, 7, 53, 38, 14, DateTimeKind.Utc).AddTicks(2649),
+                            DatePosted = new DateTime(2025, 8, 27, 15, 33, 49, 629, DateTimeKind.Utc).AddTicks(74),
                             Description = "Portable waterproof Bluetooth speaker",
                             ImageUrl = "images/speaker.png",
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -206,41 +209,6 @@ namespace MarketPlace.Migrations
                             Price = 75.50m,
                             Status = "Available"
                         });
-                });
-
-            modelBuilder.Entity("MarketPlace.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("PurchaseDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

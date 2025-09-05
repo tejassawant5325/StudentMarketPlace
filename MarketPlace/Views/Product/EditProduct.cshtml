@@ -1,0 +1,52 @@
+﻿@model EditProductViewModel
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<h2 class="mb-3">Edit Product</h2>
+
+<form asp-action="EditProduct" asp-controller="Product" enctype="multipart/form-data" method="post">
+    @* Hidden field for Id *@
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="ImageUrl" />
+
+    <div class="form-group mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Price" class="form-label"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="form-label">Image</label><br />
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Url.Content("~/images/" + @Model.ImageUrl)" alt="Product Image" width="150" height="150" class="img-thumbnail mb-2" />
+        }
+        else
+        {
+            <p>No image uploaded.</p>
+        }
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Photo" class="form-label">Upload New Image</label>
+        <input asp-for="Photo" type="file" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a asp-action="ManageProduct" asp-controller="Product" class="btn btn-secondary">Cancel</a>
+</form>
+

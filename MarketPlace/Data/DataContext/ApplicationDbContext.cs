@@ -1,4 +1,5 @@
 ﻿using MarketPlace.Data.Entities;
+using MarketPlace.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,7 @@ namespace MarketPlace.Data.DataContext
         {
         }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -48,7 +50,41 @@ namespace MarketPlace.Data.DataContext
                     Status = "Available",
                     DatePosted = DateTime.UtcNow,
                     Category = 3
+                },
+                new Product
+                {
+                    Id = 4,
+                    Name = "Gaming Laptop",
+                    Description = "High-performance laptop with RTX graphics",
+                    Price = 1500.00m,
+                    ImageUrl = "images/laptop.png",
+                    Status = "Available",
+                    DatePosted = DateTime.UtcNow,
+                    Category = 1
+                },
+                new Product
+                {
+                    Id = 5,
+                    Name = "Smartphone",
+                    Description = "Latest 5G smartphone with OLED display",
+                    Price = 899.99m,
+                    ImageUrl = "images/smartphone.png",
+                    Status = "Available",
+                    DatePosted = DateTime.UtcNow,
+                    Category = 2
+                },
+                new Product
+                {
+                    Id = 6,
+                    Name = "Bluetooth Speaker",
+                    Description = "Portable waterproof Bluetooth speaker",
+                    Price = 75.50m,
+                    ImageUrl = "images/speaker.png",
+                    Status = "Available",
+                    DatePosted = DateTime.UtcNow,
+                    Category = 3
                 }
+
             );
         }
     }

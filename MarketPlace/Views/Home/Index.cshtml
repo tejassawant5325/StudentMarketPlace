@@ -1,8 +1,56 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Student Marketplace";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">🎓 Welcome to Student Marketplace</h1>
+        <p class="lead text-muted">Buy and Sell essentials within your campus community</p>
+        <div class="mt-4">
+            <a class="btn btn-primary btn-lg shadow" href="/Product/List">
+                <i class="bi bi-bag-fill"></i> Browse Products
+            </a>
+        </div>
+    </div>
+
+    <!-- Categories Section -->
+    <div class="row text-center g-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-3">
+                <div class="card-body">
+                    <h3 class="card-title text-primary">📚 Books</h3>
+                    <p class="card-text text-muted">
+                        Get second-hand academic books at affordable prices.
+                    </p>
+                    <a href="/Product/List?category=Books" class="btn btn-outline-primary">Explore</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-3">
+                <div class="card-body">
+                    <h3 class="card-title text-success">🛒 Accessories</h3>
+                    <p class="card-text text-muted">
+                        Buy and sell stationery, gadgets, and student essentials.
+                    </p>
+                    <a href="/Product/List?category=Accessories" class="btn btn-outline-success">Explore</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-3">
+                <div class="card-body">
+                    <h3 class="card-title text-warning">👕 Clothing</h3>
+                    <p class="card-text text-muted">
+                        Find student-friendly fashion and college wear.
+                    </p>
+                    <a href="/Product/List?category=Clothing" class="btn btn-outline-warning">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+    </@* div *@>
+@* </footer> *@
