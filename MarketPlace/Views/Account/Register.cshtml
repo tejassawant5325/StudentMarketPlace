@@ -4,10 +4,10 @@
     ViewBag.Title = "Registration";
 }
 
-<div class="container w-50">
+<div class="container w-50 shadow p-4 mt-4">
     <h2 class="text-center">User Registration</h2>
     <form method="post" asp-action="Register">
-        <div asp-validation-summary="All" class="text-danger"></div>
+        @* <div asp-validation-summary="All" class="text-danger"></div> *@
 
         <div class="mb-3">
             <label asp-for="Email" class="form-label">Email address</label>
@@ -36,6 +36,13 @@
             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary w-100">Submit</button>
+        <!-- Login link -->
+        <div class="text-center mt-3">
+            <span>Already a Member -  </span>
+            <a asp-controller="Account" asp-action="Login" class="fw-bold text-decoration-none">
+                Login
+            </a>
+        </div>
     </form>
 </div>

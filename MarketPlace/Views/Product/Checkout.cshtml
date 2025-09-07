@@ -1,4 +1,4 @@
-@model MarketPlace.Models.ViewModels.PurchaseViewModel
+@model PurchaseViewModel
 @{
     var product = (MarketPlace.Data.Entities.Product)ViewBag.Product;
 }
@@ -12,9 +12,9 @@
                 <div class="card-body">
                     <h5 class="card-title">@product.Name</h5>
                     <p class="card-text text-muted">@product.Description</p>
-                    <p class="card-text">
+                    <h5 class="card-text text-price">
                         <strong>Price:</strong> @product.Price.ToString("C")
-                    </p>
+                    </h5>
                     <img src="@Url.Content("~/images/" + product.ImageUrl)" alt="@product.Name" class="img-fluid rounded" />
                 </div>
             </div>

@@ -4,11 +4,11 @@
     ViewBag.Title = "Login";
 }
 
-<div class="container w-50 mt-4">
+<div class="container w-50 mt-4 shadow p-4">
     <div>
         <h2 class="text-center">Login</h2>
         <form asp-action="Login" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
+            @* <div asp-validation-summary="All" class="text-danger"></div> *@
 
             <div class="mb-3">
                 <label asp-for="Email" class="form-label"></label>
@@ -25,10 +25,10 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
-            <div class="mb-3 form-check">
+           @*  <div class="mb-3 form-check">
                 <input asp-for="RememberMe" class="form-check-input">
                 <label class="form-check-label" asp-for="RememberMe">Keep me Logged In</label>
-            </div>
+            </div> *@
 
             <button type="submit" class="btn btn-primary w-100">Login</button>
         </form>

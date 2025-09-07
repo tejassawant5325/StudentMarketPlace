@@ -12,6 +12,18 @@
     <input type="hidden" asp-for="ImageUrl" />
 
     <div class="form-group mb-3">
+        <label class="form-label">Image</label><br />
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Url.Content("~/images/" + @Model.ImageUrl)" alt="Product Image" width="350" height="250" class="img-thumbnail mb-2" />
+        }
+        else
+        {
+            <p>No image uploaded.</p>
+        }
+    </div>
+
+    <div class="form-group mb-3">
         <label asp-for="Name" class="form-label"></label>
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
@@ -27,18 +39,6 @@
         <label asp-for="Price" class="form-label"></label>
         <input asp-for="Price" class="form-control" />
         <span asp-validation-for="Price" class="text-danger"></span>
-    </div>
-
-    <div class="form-group mb-3">
-        <label class="form-label">Image</label><br />
-        @if (!string.IsNullOrEmpty(Model.ImageUrl))
-        {
-            <img src="@Url.Content("~/images/" + @Model.ImageUrl)" alt="Product Image" width="150" height="150" class="img-thumbnail mb-2" />
-        }
-        else
-        {
-            <p>No image uploaded.</p>
-        }
     </div>
 
     <div class="form-group mb-3">

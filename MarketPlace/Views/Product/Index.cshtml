@@ -10,7 +10,7 @@
         @foreach (var product in Model)
         {
             <div class="col">
-                <div class="card h-100 shadow-sm">
+                <div class="card h-100 shadow">
                     <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
                         <img src="@Url.Content("~/images/" + product.ImageUrl)"
                              alt="@product.Name"
@@ -19,7 +19,7 @@
                     </div>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">@product.Name</h5>
-                        <p class="card-text">Price: <strong>@product.Price.ToString("C")</strong></p>
+                        <p class="card-text text-price">Price: <strong>@product.Price.ToString("C")</strong></p>
                         <p class="card-text">
                             Status:
                             <span class="badge @(product.Status == ProductStatus.Available ? "bg-success" : "bg-danger")">

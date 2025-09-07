@@ -199,7 +199,7 @@ namespace MarketPlace.Controllers
                 if (ModelState.ContainsKey("Price"))
                 {
                     ModelState["Price"].Errors.Clear(); // remove existing errors
-                    ModelState["Price"].Errors.Add("Enter Product Price"); // add new error message
+                    ModelState["Price"].Errors.Add("Price is Required"); // add new error message
                 }
                 return View(model);
             }
@@ -279,7 +279,13 @@ namespace MarketPlace.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                if (ModelState.ContainsKey("Price"))
+                {
+                    ModelState["Price"].Errors.Clear();
+                    ModelState["Price"].Errors.Add("Price is Required");
+                }
+                return View(model);
+
             }
             // Get current logged in user ID
             var userId = _userManager.GetUserId(User);

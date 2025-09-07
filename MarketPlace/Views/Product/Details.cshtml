@@ -10,7 +10,7 @@
         <div class="col-md-6 text-center">
             <img src="@Url.Content("~/images/" + @Model.ImageUrl)"
                  alt="@Model.Name"
-                 class="img-fluid rounded shadow"
+                 class="img-fluid shadow"
                  style="max-height: 450px; object-fit: contain;" />
         </div>
 
@@ -19,7 +19,7 @@
             <h1 class="fw-bold mb-3">@Model.Name</h1>
 
             <div class="mb-3">
-                <span class="h4 text-success fw-semibold">
+                <span class="h4 text-price fw-semibold">
                     @Model.Price.ToString("C")
                 </span>
             </div>

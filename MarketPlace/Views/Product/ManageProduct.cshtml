@@ -24,7 +24,11 @@
                 <tr>
                     <td>@product.Name</td>
                     <td>@product.Price.ToString("C")</td>
-                    <td>@(product.Status == 0 ? "Available" : "Sold")</td>
+                    <td>
+                        <span class="badge @(product.Status == 0 ? "bg-success" : "bg-danger")">
+                            @(product.Status == 0 ? "Available" : "Sold")
+                        </span>
+                    </td>
                     <td>@product.DatePosted.ToString("dd-MMM-yyyy")</td>
                     <td>
                         <a asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-sm btn-primary @(product.Status == ProductStatus.Sold ? "disabled" : "")">Edit</a>

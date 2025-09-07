@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - MarketPlace</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/common-styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MarketPlace.styles.css" asp-append-version="true" />
@@ -16,7 +16,7 @@
 
         @if (signInManager.IsSignedIn(User))
         {
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-1">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3 p-2">
                 <div class="container-fluid">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Market Place</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -53,7 +53,7 @@
                         @if (signInManager.IsSignedIn(User))
                         {
                             <form class="d-flex" asp-action="Logout" asp-controller="Account" method="post">
-                                <button type="submit" class="btn btn-primary">Logout @User.Identity.Name</button>
+                                <button type="submit" class="btn btn-info">Logout: @User.Identity.Name</button>
                             </form>
                         }
                         else
@@ -78,11 +78,6 @@
         </main>
     </div>
 
-   @*  <footer class="border-top footer bg-dark text-light">
-        <div class="container text-center">
-            &copy; @DateTime.Now.Year - Market Place
-        </div>
-    </footer> *@
     <!-- Footer -->
     <footer class="border-top footer bg-dark text-light text-center">
         <p class="mb-0">© @DateTime.Now.Year - Market Place | Made with ❤️ for Students</p>

@@ -3,7 +3,7 @@
     ViewData["Title"] = "Add Product";
 }
 
-<div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center">
+<div class="container-fluid d-flex justify-content-center align-items-center">
     <div class="col-12 col-md-8 col-lg-6">
         <h2 class="text-center mb-2 mt-0">Add Product</h2>
         <form asp-action="AddProduct" method="post" enctype="multipart/form-data">
@@ -27,7 +27,7 @@
                 <input asp-for="Photo" class="form-control" type="file" accept="image/*" />
                 <span asp-validation-for="Photo" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-success w-100">Add Product</button>
+            <button type="submit" class="btn btn-primary w-100">Add Product</button>
         </form>
     </div>
 </div>

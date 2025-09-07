@@ -107,14 +107,14 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">@product.Name</h5>
-                            <p class="card-text text-muted">₹@product.Price</p>
+                            <h5 class="card-text text-price">₹@product.Price</h5>
                             <a asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-primary">View</a>
                         </div>
                     </div>
                 </div>
             }
         </div>
-        <div class="text-center mt-4">
+        <div class="text-center mt-4 mb-4">
             <a asp-action="Index" asp-controller="Product" class="btn btn-outline-primary">See All Products</a>
         </div>
     </div>
@@ -122,7 +122,7 @@
     <!-- Contact Us Section -->
     <div class="mb-5">
         <h2 class="fw-bold text-center mb-4">📩 Contact Us</h2>
-        <form class="row g-3 shadow p-4 rounded bg-light" asp-action="ContactUs" asp-controller="Home">
+        <form class="row g-3 shadow p-4" asp-action="ContactUs" asp-controller="Home">
             <div class="col-md-6">
                 <label for="name" class="form-label">Your Name</label>
                 <input type="text" asp-for="@Model.ContactUs.Name" class="form-control" id="name" placeholder="Enter your name">

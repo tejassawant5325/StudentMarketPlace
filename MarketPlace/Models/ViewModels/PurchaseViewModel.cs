@@ -18,6 +18,7 @@ namespace MarketPlace.Models.ViewModels
         [Required(ErrorMessage = "Contact is required")]
         public string? ContactNumber { get; set; }
 
+        [Required(ErrorMessage = "Address is required")]
         public string? Address { get; set; }
     }
 }

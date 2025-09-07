@@ -34,7 +34,11 @@
                     <td>@product.ProductName</td>
                     <td>@product.UserEmail</td>
                     <td>@product.Price.ToString("C")</td>
-                    <td>@product.PaymentStatus</td>
+                    <td>
+                        <span class="badge @(@product.PaymentStatus == "Paid" ? "bg-success" : "bg-danger")">
+                            @product.PaymentStatus
+                        </span>
+                    </td>
                     <td>@product.OrderOn.ToString("dd-MMM-yyyy")</td>
                 </tr>
             }
