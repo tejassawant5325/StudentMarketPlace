@@ -1,4 +1,4 @@
-﻿namespace MarketPlace.Models
+﻿namespace MarketPlace.Data.Entities
 {
     public class Order
     {
@@ -9,5 +9,8 @@
         public required string ContactNumber { get; set; }
         public required string Address { get; set; }
         public DateTime PurchaseDate { get; set; } = DateTime.Now;
+        public bool IsPaid { get; set; }
+        public DateTime PaidAt { get; set; }
+        public string? UserId { get; set; }
     }
 }

@@ -25,7 +25,7 @@
             </div>
 
             <div class="mb-3">
-                <span class="badge bg-success
+                <span class="badge @(Model.Status == ProductStatus.Available ? "bg-success" : "bg-danger")
                     fs-6 px-3 py-2">
                     @Model.Status
                 </span>
@@ -43,12 +43,10 @@
                 <span class="text-secondary">@Model.DatePosted.ToShortDateString()</span>
             </div>
 
-            <!-- Buttons -->
             <div class="d-flex gap-3 mt-4">
-                <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary px-4">Back</a>
-                <a asp-action="Buy" asp-route-id="@Model.Id" class="btn btn-primary px-4">
-                    Buy
-                </a>
+                <a href="@(Context.Request.Headers["Referer"].ToString() ?? Url.Action("Index", "Home"))"
+                   class="btn btn-outline-secondary px-4">Back</a>
+                <a asp-action="Checkout" asp-route-id="@Model.Id" class="btn btn-primary px-4">Buy</a>
             </div>
         </div>
     </div>

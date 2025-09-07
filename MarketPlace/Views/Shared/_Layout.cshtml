@@ -7,20 +7,16 @@
     <title>@ViewData["Title"] - MarketPlace</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/common-styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MarketPlace.styles.css" asp-append-version="true" />
-    <style>
-        .navbar-nav .nav-link {
-            padding-left: 0.75rem;
-            padding-right: 0.75rem;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
 </head>
 <body>
     <header>
 
         @if (signInManager.IsSignedIn(User))
         {
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-1">
                 <div class="container-fluid">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Market Place</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -47,6 +43,10 @@
                                         <a class="dropdown-item" asp-controller="Product" asp-action="ManageProduct">Manage Products</a>
                                     </li>
                                 </ul>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="Product" asp-action="MyOrders">My Orders</a>
                             </li>
                         </ul>
 
@@ -78,10 +78,14 @@
         </main>
     </div>
 
-    <footer class="border-top footer bg-dark text-light">
+   @*  <footer class="border-top footer bg-dark text-light">
         <div class="container text-center">
             &copy; @DateTime.Now.Year - Market Place
         </div>
+    </footer> *@
+    <!-- Footer -->
+    <footer class="border-top footer bg-dark text-light text-center">
+        <p class="mb-0">© @DateTime.Now.Year - Market Place | Made with ❤️ for Students</p>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

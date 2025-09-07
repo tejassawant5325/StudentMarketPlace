@@ -1,0 +1,34 @@
+@model PaymentViewModel
+
+<div class="container mt-4">
+    <h2 class="mb-3">Payment</h2>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Order Summary</h5>
+                    <p class="mb-1"><strong>Product:</strong> @Model.Product.Name</p>
+                    <p class="mb-1"><strong>Price:</strong> @Model.Product.Price.ToString("C")</p>
+                    <p class="text-muted">@Model.Product.Description</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Scan to Pay (Demo)</h5>
+                    <p class="text-muted">Use any UPI app to scan. This is a demo QR code.</p>
+                    <img src="@Model.QrCodeUrl" alt="QR Code" class="img-fluid mb-3" style="max-width: 240px;" />
+
+                    <form asp-action="ConfirmPayment" asp-controller="Product" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="orderId" value="@Model.Order.Id" />
+                        <button type="submit" class="btn btn-success">Payment Completed</button>
+                        <a asp-action="CancelOrder" asp-controller="Product" asp-route-orderId="@Model.Order.Id" class="btn btn-outline-secondary ms-2">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

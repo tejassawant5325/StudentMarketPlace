@@ -1,5 +1,5 @@
-﻿using MarketPlace.Data.Entities;
-using MarketPlace.Models;
+﻿using MarketPlace.Common;
+using MarketPlace.Data.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +12,7 @@ namespace MarketPlace.Data.DataContext
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<ContactUs> ContactUs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,7 +26,7 @@ namespace MarketPlace.Data.DataContext
                     Description = "Powerful laptop with 16GB RAM",
                     Price = 750.00m,
                     ImageUrl = "images/laptop.png",
-                    Status = "Available",
+                    Status = ProductStatus.Available,
                     DatePosted = DateTime.UtcNow,
                     Category = 1
                 },
@@ -36,7 +37,7 @@ namespace MarketPlace.Data.DataContext
                     Description = "Calculus textbook for university",
                     Price = 40.00m,
                     ImageUrl = "images/textbook.png",
-                    Status = "Available",
+                    Status = ProductStatus.Available,
                     DatePosted = DateTime.UtcNow,
                     Category = 2
                 },
@@ -47,7 +48,7 @@ namespace MarketPlace.Data.DataContext
                     Description = "Wireless noise-cancelling headphones",
                     Price = 120.00m,
                     ImageUrl = "images/headphones.png",
-                    Status = "Available",
+                    Status = ProductStatus.Available,
                     DatePosted = DateTime.UtcNow,
                     Category = 3
                 },
@@ -58,7 +59,7 @@ namespace MarketPlace.Data.DataContext
                     Description = "High-performance laptop with RTX graphics",
                     Price = 1500.00m,
                     ImageUrl = "images/laptop.png",
-                    Status = "Available",
+                    Status = ProductStatus.Available,
                     DatePosted = DateTime.UtcNow,
                     Category = 1
                 },
@@ -66,10 +67,10 @@ namespace MarketPlace.Data.DataContext
                 {
                     Id = 5,
                     Name = "Smartphone",
-                    Description = "Latest 5G smartphone with OLED display",
+                    Description = "Latest 5G     smartphone with OLED display",
                     Price = 899.99m,
                     ImageUrl = "images/smartphone.png",
-                    Status = "Available",
+                    Status = ProductStatus.Available,
                     DatePosted = DateTime.UtcNow,
                     Category = 2
                 },
@@ -80,7 +81,7 @@ namespace MarketPlace.Data.DataContext
                     Description = "Portable waterproof Bluetooth speaker",
                     Price = 75.50m,
                     ImageUrl = "images/speaker.png",
-                    Status = "Available",
+                    Status = ProductStatus.Available,
                     DatePosted = DateTime.UtcNow,
                     Category = 3
                 }

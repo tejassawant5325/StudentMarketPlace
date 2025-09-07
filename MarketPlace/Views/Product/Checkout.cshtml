@@ -1,0 +1,65 @@
+@model MarketPlace.Models.ViewModels.PurchaseViewModel
+@{
+    var product = (MarketPlace.Data.Entities.Product)ViewBag.Product;
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Checkout</h2>
+
+    <div class="row g-4">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text text-muted">@product.Description</p>
+                    <p class="card-text">
+                        <strong>Price:</strong> @product.Price.ToString("C")
+                    </p>
+                    <img src="@Url.Content("~/images/" + product.ImageUrl)" alt="@product.Name" class="img-fluid rounded" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Buyer Details</h5>
+
+                    <form asp-action="Checkout" asp-controller="Product" method="post">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <input type="hidden" asp-for="ProductId" value="@product.Id" />
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ContactNumber" class="form-label"></label>
+                            <input asp-for="ContactNumber" class="form-control" />
+                            <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Address" class="form-label"></label>
+                            <textarea asp-for="Address" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Checkout</button>
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary ms-2">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

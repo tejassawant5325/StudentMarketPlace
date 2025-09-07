@@ -4,6 +4,7 @@ using MarketPlace.Data.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketPlace.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250907083402_AddedContactUsTable")]
+    partial class AddedContactUsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,50 +112,6 @@ namespace MarketPlace.Migrations
                     b.ToTable("ContactUs");
                 });
 
-            modelBuilder.Entity("MarketPlace.Data.Entities.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsPaid")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("PaidAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("PurchaseDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("MarketPlace.Data.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -191,8 +150,9 @@ namespace MarketPlace.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -203,74 +163,109 @@ namespace MarketPlace.Migrations
                         {
                             Id = 1,
                             Category = 1,
-                            DatePosted = new DateTime(2025, 9, 7, 10, 55, 57, 101, DateTimeKind.Utc).AddTicks(9623),
+                            DatePosted = new DateTime(2025, 9, 7, 8, 34, 2, 128, DateTimeKind.Utc).AddTicks(82),
                             Description = "Powerful laptop with 16GB RAM",
                             ImageUrl = "images/laptop.png",
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Laptop",
                             Price = 750.00m,
-                            Status = 0
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 2,
                             Category = 2,
-                            DatePosted = new DateTime(2025, 9, 7, 10, 55, 57, 101, DateTimeKind.Utc).AddTicks(9627),
+                            DatePosted = new DateTime(2025, 9, 7, 8, 34, 2, 128, DateTimeKind.Utc).AddTicks(85),
                             Description = "Calculus textbook for university",
                             ImageUrl = "images/textbook.png",
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Textbook",
                             Price = 40.00m,
-                            Status = 0
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 3,
                             Category = 3,
-                            DatePosted = new DateTime(2025, 9, 7, 10, 55, 57, 101, DateTimeKind.Utc).AddTicks(9630),
+                            DatePosted = new DateTime(2025, 9, 7, 8, 34, 2, 128, DateTimeKind.Utc).AddTicks(87),
                             Description = "Wireless noise-cancelling headphones",
                             ImageUrl = "images/headphones.png",
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Headphones",
                             Price = 120.00m,
-                            Status = 0
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 4,
                             Category = 1,
-                            DatePosted = new DateTime(2025, 9, 7, 10, 55, 57, 101, DateTimeKind.Utc).AddTicks(9632),
+                            DatePosted = new DateTime(2025, 9, 7, 8, 34, 2, 128, DateTimeKind.Utc).AddTicks(89),
                             Description = "High-performance laptop with RTX graphics",
                             ImageUrl = "images/laptop.png",
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Gaming Laptop",
                             Price = 1500.00m,
-                            Status = 0
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 5,
                             Category = 2,
-                            DatePosted = new DateTime(2025, 9, 7, 10, 55, 57, 101, DateTimeKind.Utc).AddTicks(9634),
-                            Description = "Latest 5G     smartphone with OLED display",
+                            DatePosted = new DateTime(2025, 9, 7, 8, 34, 2, 128, DateTimeKind.Utc).AddTicks(90),
+                            Description = "Latest 5G smartphone with OLED display",
                             ImageUrl = "images/smartphone.png",
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Smartphone",
                             Price = 899.99m,
-                            Status = 0
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 6,
                             Category = 3,
-                            DatePosted = new DateTime(2025, 9, 7, 10, 55, 57, 101, DateTimeKind.Utc).AddTicks(9637),
+                            DatePosted = new DateTime(2025, 9, 7, 8, 34, 2, 128, DateTimeKind.Utc).AddTicks(92),
                             Description = "Portable waterproof Bluetooth speaker",
                             ImageUrl = "images/speaker.png",
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Bluetooth Speaker",
                             Price = 75.50m,
-                            Status = 0
+                            Status = "Available"
                         });
+                });
+
+            modelBuilder.Entity("MarketPlace.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PurchaseDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

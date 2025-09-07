@@ -1,4 +1,6 @@
-﻿@{
+﻿@model HomePageViewModel;
+
+@{
     ViewData["Title"] = "Student Marketplace";
 }
 
@@ -7,50 +9,136 @@
     <div class="text-center mb-5">
         <h1 class="display-4 fw-bold text-primary">🎓 Welcome to Student Marketplace</h1>
         <p class="lead text-muted">Buy and Sell essentials within your campus community</p>
-        <div class="mt-4">
-            <a class="btn btn-primary btn-lg shadow" href="/Product/List">
+        @* <div class="mt-4">
+            <a class="btn btn-primary btn-lg shadow" asp-action="Index" asp-controller="Product">
                 <i class="bi bi-bag-fill"></i> Browse Products
             </a>
+        </div> *@
+    </div>
+
+    <!-- Carousel Section -->
+    @* <div id="marketplaceCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+        <div class="carousel-inner rounded shadow">
+            <div class="carousel-item active">
+                <img src="~/images/books.jpg" class="d-block w-100" alt="Books">
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                    <h5>Books & Study Material</h5>
+                    <p>Find affordable textbooks and guides from fellow students.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/electronics.jpg" class="d-block w-100" alt="Electronics">
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                    <h5>Electronics & Gadgets</h5>
+                    <p>Get second-hand electronics at student-friendly prices.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/stationery.jpg" class="d-block w-100" alt="Stationery">
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                    <h5>Stationery & Supplies</h5>
+                    <p>All your college essentials in one place.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#marketplaceCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#marketplaceCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div> *@
+
+    <!-- Recently Added Section -->
+    <div class="mb-5">
+        <h2 class="fw-bold text-center mb-4">🆕 Recently Added</h2>
+        <div class="row">
+            @* Example static products (replace with loop) *@
+            @* <div class="col-md-3 mb-3">
+                <div class="card shadow h-100">
+                    <img src="~/images/product1.jpg" class="card-img-top" alt="Product 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Second-hand Laptop</h5>
+                        <p class="card-text text-muted">₹18,000</p>
+                        <a asp-action="Details" asp-controller="Product" asp-route-id="1" class="btn btn-sm btn-primary">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card shadow h-100">
+                    <img src="~/images/product2.jpg" class="card-img-top" alt="Product 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Engineering Books Set</h5>
+                        <p class="card-text text-muted">₹600</p>
+                        <a asp-action="Details" asp-controller="Product" asp-route-id="2" class="btn btn-sm btn-primary">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card shadow h-100">
+                    <img src="~/images/product3.jpg" class="card-img-top" alt="Product 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Scientific Calculator</h5>
+                        <p class="card-text text-muted">₹300</p>
+                        <a asp-action="Details" asp-controller="Product" asp-route-id="3" class="btn btn-sm btn-primary">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card shadow h-100">
+                    <img src="~/images/product4.jpg" class="card-img-top" alt="Product 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Hostel Essentials Kit</h5>
+                        <p class="card-text text-muted">₹1,200</p>
+                        <a asp-action="Details" asp-controller="Product" asp-route-id="4" class="btn btn-sm btn-primary">View</a>
+                    </div>
+                </div>
+            </div> *@
+            @foreach (var product in Model.RecentProducts)
+            {
+                <div class="col-md-3 mb-3">
+                    <div class="card shadow h-100">
+                        @* <img src="~/images/@product.ImageUrl" class="card-img-top" alt="@product.Name" /> *@
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
+                            <img src="@Url.Content("~/images/" + product.ImageUrl)"
+                                 alt="@product.Name"
+                                 class="img-fluid h-100"
+                                 style="object-fit: contain;" />
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text text-muted">₹@product.Price</p>
+                            <a asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-primary">View</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center mt-4">
+            <a asp-action="Index" asp-controller="Product" class="btn btn-outline-primary">See All Products</a>
         </div>
     </div>
 
-    <!-- Categories Section -->
-    <div class="row text-center g-4">
-        <div class="col-md-4">
-            <div class="card h-100 shadow-sm border-0 rounded-3">
-                <div class="card-body">
-                    <h3 class="card-title text-primary">📚 Books</h3>
-                    <p class="card-text text-muted">
-                        Get second-hand academic books at affordable prices.
-                    </p>
-                    <a href="/Product/List?category=Books" class="btn btn-outline-primary">Explore</a>
-                </div>
+    <!-- Contact Us Section -->
+    <div class="mb-5">
+        <h2 class="fw-bold text-center mb-4">📩 Contact Us</h2>
+        <form class="row g-3 shadow p-4 rounded bg-light" asp-action="ContactUs" asp-controller="Home">
+            <div class="col-md-6">
+                <label for="name" class="form-label">Your Name</label>
+                <input type="text" asp-for="@Model.ContactUs.Name" class="form-control" id="name" placeholder="Enter your name">
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card h-100 shadow-sm border-0 rounded-3">
-                <div class="card-body">
-                    <h3 class="card-title text-success">🛒 Accessories</h3>
-                    <p class="card-text text-muted">
-                        Buy and sell stationery, gadgets, and student essentials.
-                    </p>
-                    <a href="/Product/List?category=Accessories" class="btn btn-outline-success">Explore</a>
-                </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">Your Email</label>
+                <input type="email" asp-for="@Model.ContactUs.Email" class="form-control" id="email" placeholder="Enter your email">
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card h-100 shadow-sm border-0 rounded-3">
-                <div class="card-body">
-                    <h3 class="card-title text-warning">👕 Clothing</h3>
-                    <p class="card-text text-muted">
-                        Find student-friendly fashion and college wear.
-                    </p>
-                    <a href="/Product/List?category=Clothing" class="btn btn-outline-warning">Explore</a>
-                </div>
+            <div class="col-12">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" asp-for="@Model.ContactUs.Message" id="message" rows="4" placeholder="Type your message..."></textarea>
             </div>
-        </div>
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </div>
+        </form>
     </div>
 </div>
 
-    </@* div *@>
-@* </footer> *@

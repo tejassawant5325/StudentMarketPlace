@@ -1,4 +1,6 @@
-﻿namespace MarketPlace.Data.Entities
+﻿using MarketPlace.Common;
+
+namespace MarketPlace.Data.Entities
 {
     public class Product
     {
@@ -7,7 +9,7 @@
         public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; } = 0;
         public string ImageUrl { get; set; } = string.Empty;
-        public string Status { get; set; } = string.Empty;
+        public ProductStatus? Status { get; set; }
         public DateTime DatePosted { get; set; }
         public int Category { get; set; }
         public string? AddedBy { get; set; }

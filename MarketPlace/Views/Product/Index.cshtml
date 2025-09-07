@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Product>
+@model IEnumerable<Product>
 
 @{
     ViewData["Title"] = "Product Page";
@@ -22,21 +22,14 @@
                         <p class="card-text">Price: <strong>@product.Price.ToString("C")</strong></p>
                         <p class="card-text">
                             Status:
-                            <span class="badge @(product.Status == "Available" ? "bg-success" : "bg-secondary")">
+                            <span class="badge @(product.Status == ProductStatus.Available ? "bg-success" : "bg-danger")">
                                 @product.Status
                             </span>
                         </p>
 
                         <div class="d-flex gap-2 mt-auto">
-                            <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id"
-                               class="btn btn-outline-primary flex-fill">
-                                View
-                            </a>
-                            <a asp-controller="Order" asp-action="OrderForm" asp-route-id="@product.Id"
-                               class="btn btn-primary"
-                                flex-fill">
-                                Buy
-                            </a>
+                            <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="btn btn-outline-primary flex-fill">View</a>
+                            <a asp-controller="Product" asp-action="Checkout" asp-route-id="@product.Id" class="btn btn-primary flex-fill @(product.Status == ProductStatus.Sold ? "disabled" : "")">Buy</a>
                         </div>
                     </div>
                 </div>

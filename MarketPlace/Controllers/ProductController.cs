@@ -1,4 +1,5 @@
-﻿using MarketPlace.Data.DataContext;
+using MarketPlace.Common;
+using MarketPlace.Data.DataContext;
 using MarketPlace.Data.Entities;
 using MarketPlace.Models;
 using MarketPlace.Models.ViewModels;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 
 namespace MarketPlace.Controllers
@@ -26,22 +28,147 @@ namespace MarketPlace.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Get current logged-in user's Id (stored as string in claims)
-            //var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            // Convert to Guid (assuming your AddedBy column is Guid)
-            //Guid loggedInUserId = Guid.Parse(userIdString!);
-            // Get current logged in user ID
             var userId = _userManager.GetUserId(User);
             // Fetch products where AddedBy is not the logged-in user
             var products = await _dbContext.Products
-                                     .Where(p => p.AddedBy != userId)
+                                     .Where(p => p.AddedBy != userId && p.Status != ProductStatus.Sold)
                                      .ToListAsync();
 
             ViewData["Title"] = "Products";
             return View(products);
         }
 
+
+        #region CHECKOUT METHODS
+        //This section contains method which to display the checkout view and process checkout
+        [HttpGet]
+        public async Task<IActionResult> Checkout(int id)
+        {
+            var product = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["Title"] = "Checkout";
+            ViewBag.Product = product;
+
+            var model = new PurchaseViewModel
+            {
+                ProductId = id
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Checkout(PurchaseViewModel model)
+        {
+            var product = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == model.ProductId);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            product.Status = ProductStatus.Sold;
+            _dbContext.Products.Update(product);
+
+            if (!ModelState.IsValid)
+            {
+                ViewData["Title"] = "Checkout";
+                ViewBag.Product = product;
+                return View("Checkout", model);
+            }
+
+            var order = new Order
+            {
+                ProductId = product.Id,
+                Name = model.Name,
+                Email = model.Email,
+                ContactNumber = model.ContactNumber,
+                Address = model.Address,
+                PurchaseDate = DateTime.Now,
+                UserId = _userManager.GetUserId(User)
+            };
+
+            _dbContext.Orders.Add(order);
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction("Payment", new { orderId = order.Id });
+        }
+        #endregion
+
+        [HttpGet]
+        public async Task<IActionResult> Payment(int orderId)
+        {
+            var order = await _dbContext.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            var product = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == order.ProductId);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var upi = $"upi://pay?pa=nehasawant549@okicici&pn=MarketPlace&am={product.Price}&cu=INR";
+            var qrUrl = $"https://api.qrserver.com/v1/create-qr-code/?size=220x220&data={Uri.EscapeDataString(upi)}";
+
+            var vm = new PaymentViewModel
+            {
+                Order = order,
+                Product = product,
+                QrCodeUrl = qrUrl
+            };
+
+            ViewData["Title"] = "Payment";
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmPayment(int orderId)
+        {
+            var orderDetails = await _dbContext.Orders.FindAsync(orderId);
+            if (orderDetails != null)
+            {
+                orderDetails.IsPaid = true;
+                orderDetails.PaidAt = DateTime.Now;
+
+                _dbContext.Orders.Update(orderDetails);
+                await _dbContext.SaveChangesAsync();
+            }
+            TempData["PaymentStatus"] = "Completed (Demo)";
+            return RedirectToAction("Confirmation", new { orderId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Confirmation(int orderId)
+        {
+            var order = await _dbContext.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            var product = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == order.ProductId);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new PaymentViewModel
+            {
+                Order = order,
+                Product = product,
+                QrCodeUrl = string.Empty
+            };
+
+            ViewData["Title"] = "Order Confirmation";
+            return View(vm);
+        }
 
         // New Details action
         public async Task<IActionResult> Details(int id)
@@ -68,7 +195,13 @@ namespace MarketPlace.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+
+                if (ModelState.ContainsKey("Price"))
+                {
+                    ModelState["Price"].Errors.Clear(); // remove existing errors
+                    ModelState["Price"].Errors.Add("Enter Product Price"); // add new error message
+                }
+                return View(model);
             }
 
             string? uniquePhotoPath = ProcessFileUploads(model);
@@ -83,7 +216,7 @@ namespace MarketPlace.Controllers
                 Price = model.Price,
                 ImageUrl = uniquePhotoPath,
                 DatePosted = DateTime.Now,
-                Status = model.Status,
+                Status = ProductStatus.Available,
                 AddedBy = userId // <-- Assign logged-in user
             };
 
@@ -96,13 +229,8 @@ namespace MarketPlace.Controllers
         [HttpGet]
         public async Task<IActionResult> ManageProduct()
         {
-            //var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
             // Get current logged in user ID
             var userId = _userManager.GetUserId(User);
-            // Convert to Guid (assuming your AddedBy column is Guid)
-            //Guid loggedInUserId = Guid.Parse(userIdString!);
-
-            // Fetch products where AddedBy is not the logged-in user
             var products = await _dbContext.Products
                                      .Where(p => p.AddedBy == userId)
                                      .ToListAsync();
@@ -248,5 +376,70 @@ namespace MarketPlace.Controllers
             return View(model);
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> MyOrders()
+        {
+            var userId = _userManager.GetUserId(User);
+            //var userOrders = await _dbContext.Orders.Where(x => x.UserId == userId).ToListAsync();
+            var userOrders = await (from o in _dbContext.Orders
+                                    join u in _dbContext.Users on o.UserId equals u.Id
+                                    join p in _dbContext.Products on o.ProductId equals p.Id
+                                    where o.UserId == userId
+                                    select new
+                                    {
+                                        OrderId = o.Id,
+                                        UserName = u.Email,
+                                        ProductName = p.Name,
+                                        Price = p.Price,
+                                        OrderDate = o.PurchaseDate,
+                                        IsPaid = o.IsPaid ? "Paid" : "Pending",
+                                        ImageUrl = p.ImageUrl
+                                    }).ToListAsync();
+
+            var myOrdersList = new List<MyOrdersViewModel>();
+            foreach (var order in userOrders)
+            {
+                var myOrder = new MyOrdersViewModel
+                {
+                    ProductName = order.ProductName,
+                    PaymentStatus = order.IsPaid,
+                    OrderOn = order.OrderDate,
+                    Price = order.Price,
+                    OrderId = order.OrderId,
+                    UserEmail = order.UserName,
+                    ImageUrl = order.ImageUrl
+                };
+                myOrdersList.Add(myOrder);
+            }
+            return View(myOrdersList);
+        }
+
+        public async Task<IActionResult> CancelOrder(int orderId)
+        {
+            if (orderId > 0)
+            {
+                var userOrders = await _dbContext.Orders.FindAsync(orderId);
+                if (userOrders != null)
+                {
+                    var product = await _dbContext.Products.FindAsync(userOrders.ProductId);
+                    if (product != null)
+                    {
+                        product.Status = ProductStatus.Available;
+                        _dbContext.Products.Update(product);
+                    }
+
+
+                    _dbContext.Orders.Remove(userOrders);
+                    await _dbContext.SaveChangesAsync();
+                }
+                else
+                {
+                    return NotFound("Order Not Found");
+                }
+                return RedirectToAction("Index", "Product");
+            }
+            return BadRequest("Invalid Order Id");
+        }
     }
 }
