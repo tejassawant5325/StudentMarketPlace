@@ -1,4 +1,4 @@
-using MarketPlace.Common;
+﻿using MarketPlace.Common;
 using MarketPlace.Data.DataContext;
 using MarketPlace.Data.Entities;
 using MarketPlace.Models;
@@ -195,7 +195,6 @@ namespace MarketPlace.Controllers
         {
             if (!ModelState.IsValid)
             {
-
                 if (ModelState.ContainsKey("Price"))
                 {
                     ModelState["Price"].Errors.Clear(); // remove existing errors
@@ -222,6 +221,8 @@ namespace MarketPlace.Controllers
 
             _dbContext.Products.Add(newProduct);
             await _dbContext.SaveChangesAsync();
+            // ✅ Add success message
+            TempData["Message"] = "Product uploaded successfully!";
 
             return RedirectToAction("Index");
         }
@@ -279,13 +280,12 @@ namespace MarketPlace.Controllers
         {
             if (!ModelState.IsValid)
             {
-                if (ModelState.ContainsKey("Price"))
+                if (ModelState.ContainsKey("Price") && ModelState["Price"].Errors.Any())
                 {
                     ModelState["Price"].Errors.Clear();
                     ModelState["Price"].Errors.Add("Price is Required");
+                    return View(model);
                 }
-                return View(model);
-
             }
             // Get current logged in user ID
             var userId = _userManager.GetUserId(User);
@@ -309,6 +309,7 @@ namespace MarketPlace.Controllers
 
                 _dbContext.Products.Update(existingProduct);
                 await _dbContext.SaveChangesAsync();
+                TempData["Message"] = "Product updated successfully!";
             }
             else
             {
@@ -349,7 +350,7 @@ namespace MarketPlace.Controllers
             }
             return uniquePhotoPath;
         }
-        // Delete product
+
         [HttpPost]
         public async Task<IActionResult> Buy(PurchaseViewModel model)
         {
@@ -447,5 +448,34 @@ namespace MarketPlace.Controllers
             }
             return BadRequest("Invalid Order Id");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var product = await _dbContext.Products.FindAsync(id);
+            if (product == null)
+            {
+                TempData["Error"] = "Product not found.";
+                return RedirectToAction("ManageProduct");
+            }
+
+            // Optional: check ownership (only allow owner to delete)
+            var userId = _userManager.GetUserId(User);
+            if (product.AddedBy != userId)
+            {
+                TempData["Error"] = "You are not authorized to delete this product.";
+                return RedirectToAction("ManageProduct");
+            }
+
+            _dbContext.Products.Remove(product);
+            await _dbContext.SaveChangesAsync();
+
+            TempData["Message"] = "Product deleted successfully!";
+            return RedirectToAction("ManageProduct");
+        }
+
+        // Inside your existing ProductController
+
+
     }
 }

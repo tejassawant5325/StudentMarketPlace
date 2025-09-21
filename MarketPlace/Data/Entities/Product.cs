@@ -15,5 +15,9 @@ namespace MarketPlace.Data.Entities
         public string? AddedBy { get; set; }
         public DateTime ModifiedDate { get; set; }
         public string? ModifiedBy { get; set; }
+        // For digital product file
+        public string? DigitalFilePath { get; set; } // keep this
+
+
     }
 }

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/common-styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MarketPlace.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
 </head>
 <body>
     <header>
@@ -18,7 +18,7 @@
         {
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3 p-2">
                 <div class="container-fluid">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Market Place</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Student Market Place</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -29,7 +29,6 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-controller="Product" asp-action="Index">Products</a>
                             </li>
-
                             <!-- Become a Seller Dropdown -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-light" href="#" id="sellerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,11 +38,15 @@
                                     <li>
                                         <a class="dropdown-item" asp-controller="Product" asp-action="AddProduct">Sell Product</a>
                                     </li>
+                                    @*  <li>
+                                        <a class="dropdown-item" asp-controller="Product" asp-action="AddDigitalProduct">Digital Product</a>
+                                    </li> *@
                                     <li>
                                         <a class="dropdown-item" asp-controller="Product" asp-action="ManageProduct">Manage Products</a>
                                     </li>
                                 </ul>
                             </li>
+
 
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-controller="Product" asp-action="MyOrders">My Orders</a>
@@ -73,6 +76,20 @@
         }
     </header>
     <div class="container">
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["Message"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                @TempData["Error"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -80,7 +97,7 @@
 
     <!-- Footer -->
     <footer class="border-top footer bg-dark text-light text-center">
-        <p class="mb-0">© @DateTime.Now.Year - Market Place | Made with ❤️ for Students</p>
+        <p class="mb-0">© @DateTime.Now.Year - Student Market Place | Made with ❤️ for Students</p>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

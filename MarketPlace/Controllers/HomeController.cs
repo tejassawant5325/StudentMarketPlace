@@ -30,11 +30,6 @@ namespace MarketPlace.Controllers
             return View(homePageViewModel);
         }
 
-        public IActionResult About()
-        {
-            return View();
-        }
-
         [HttpPost]
         public async Task<IActionResult> ContactUs(HomePageViewModel model)
         {
@@ -42,14 +37,17 @@ namespace MarketPlace.Controllers
             {
                 return BadRequest();
             }
+
             var contactUs = new ContactUs
             {
                 Name = model.ContactUs.Name,
                 Email = model.ContactUs.Email,
                 Message = model.ContactUs.Message
             };
+
             _dbContext.ContactUs.Add(contactUs);
             await _dbContext.SaveChangesAsync();
+
             return RedirectToAction("Index", "Home");
         }
     }
