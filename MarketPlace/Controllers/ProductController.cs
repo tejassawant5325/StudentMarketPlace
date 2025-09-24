@@ -476,6 +476,21 @@ namespace MarketPlace.Controllers
 
         // Inside your existing ProductController
 
+        [HttpGet]
+        public IActionResult DownloadFile(string filename)
+        {
+            if (string.IsNullOrEmpty(filename))
+            {
+                return Content("Filename is not provided.");
+            }
+            string filePath = Path.Combine(_environment.WebRootPath, "images", filename);
+            if (!System.IO.File.Exists(filePath))
+            {
+                return Content("File not found.");
+            }
+            byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(fileBytes, "application/octet-stream", filename);
+        }
 
     }
 }

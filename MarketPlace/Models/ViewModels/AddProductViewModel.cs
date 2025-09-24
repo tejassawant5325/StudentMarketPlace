@@ -15,8 +15,9 @@ namespace MarketPlace.Models.ViewModels
 
         [Required(ErrorMessage = "Enter Product Image")]
         public IFormFile? Photo { get; set; }
-        // For digital product upload
-        //[Required(ErrorMessage = "Upload file")]
-        //public IFormFile? DigitalFile { get; set; }
+
+        [Display(Name="Product Type")]
+        [Required(ErrorMessage = "Select Product Type")]
+        public string? ProductType { get; set; }
     }
 }

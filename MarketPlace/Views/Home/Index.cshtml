@@ -42,16 +42,38 @@
                 <div class="col-md-3 mb-3">
                     <div class="card shadow h-100">
                         @* <img src="~/images/@product.ImageUrl" class="card-img-top" alt="@product.Name" /> *@
+
                         <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
-                            <img src="@Url.Content("~/images/" + product.ImageUrl)"
-                                 alt="@product.Name"
-                                 class="img-fluid h-100"
-                                 style="object-fit: contain;" />
+                            @if (product.Price < 1)
+                            {
+                                <img src="@Url.Content("~/images/notesbg.jpg")"
+                                     alt="@product.Name"
+                                     class="img-fluid h-100"
+                                     style="object-fit: contain;" />
+                            }
+                            else
+                            {
+                                <img src="@Url.Content("~/images/" + product.ImageUrl)"
+                                     alt="@product.Name"
+                                     class="img-fluid h-100"
+                                     style="object-fit: contain;" />
+                            }
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">@product.Name</h5>
                             <h5 class="card-text text-price">₹@product.Price</h5>
-                            <a asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-primary">View</a>
+                            @if (product.Price < 1)
+                            {
+                                <div class="d-flex gap-2 mt-auto">
+                                    <a asp-controller="Product" asp-action="DownloadFile" asp-route-fileName="@product.ImageUrl" class="btn btn-outline-primary flex-fill">Download</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="d-flex gap-2 mt-auto">
+                                    <a asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-outline-primary flex-fill">View</a>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

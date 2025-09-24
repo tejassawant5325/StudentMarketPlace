@@ -12,10 +12,20 @@
             <div class="col">
                 <div class="card h-100 shadow">
                     <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
-                        <img src="@Url.Content("~/images/" + product.ImageUrl)"
-                             alt="@product.Name"
-                             class="img-fluid h-100"
-                             style="object-fit: contain;" />
+                        @if (product.Price < 1)
+                        {
+                            <img src="@Url.Content("~/images/notesbg.jpg")"
+                                 alt="@product.Name"
+                                 class="img-fluid h-100"
+                                 style="object-fit: contain;" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/images/" + product.ImageUrl)"
+                                 alt="@product.Name"
+                                 class="img-fluid h-100"
+                                 style="object-fit: contain;" />
+                        }
                     </div>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">@product.Name</h5>
@@ -27,10 +37,19 @@
                             </span>
                         </p>
 
-                        <div class="d-flex gap-2 mt-auto">
-                            <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="btn btn-outline-primary flex-fill">View</a>
-                            <a asp-controller="Product" asp-action="Checkout" asp-route-id="@product.Id" class="btn btn-primary flex-fill @(product.Status == ProductStatus.Sold ? "disabled" : "")">Buy</a>
-                        </div>
+                        @if (product.Price < 1)
+                        {
+                            <div class="d-flex gap-2 mt-auto">
+                                <a asp-controller="Product" asp-action="DownloadFile" asp-route-fileName="@product.ImageUrl" class="btn btn-outline-primary flex-fill">Download</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="d-flex gap-2 mt-auto">
+                                <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="btn btn-outline-primary flex-fill">View</a>
+                                <a asp-controller="Product" asp-action="Checkout" asp-route-id="@product.Id" class="btn btn-primary flex-fill @(product.Status == ProductStatus.Sold ? "disabled" : "")">Buy</a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
