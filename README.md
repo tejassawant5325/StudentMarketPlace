@@ -23,9 +23,8 @@
 - View product listings with search and filter options.  
 - **Contact Us page** for users to send messages or queries:
   - Users can submit name, email, subject, and message.  
-  - Admin can view messages in the dashboard.  
-- Admin panel to manage users, products, and messages.  
-- Option to contact seller via email or in-app messaging.  
+- Seller panel to manage users, products.  
+- Option to contact seller via email or contact no.  
 - Responsive design for desktop and mobile.  
 
 ---
@@ -54,7 +53,7 @@ Edit/Delete your own listings.
 
 Contact Us: Navigate to the Contact page to send messages to admin.
 
-Admin can view all users, products, and contact messages from the Admin Panel.
+Seller can view all users, products, and contact messages from the Panel.
 
 Digital products can be downloaded directly, while non-digital products follow normal trade or offline payment process.
 
