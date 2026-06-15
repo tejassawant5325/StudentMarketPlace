@@ -1,143 +1,71 @@
-# Student Marketplace
+# 🎓 Student Marketplace
 
-**Student Marketplace** is a web application built with **ASP.NET MVC** that allows students to buy, sell, and trade items within their campus or community. The platform provides user authentication, product listings, and an admin panel for managing users, products, and messages.
+A web-based marketplace built with **ASP.NET MVC** that enables students to buy, sell, and exchange products within their campus community.
 
----
+## ✨ Features
 
-## Table of Contents
+* Student Registration & Login
+* Buy, Sell, and Manage Product Listings
+* Support for Digital & Non-Digital Products
+* Product Search and Filtering
+* Seller Dashboard
+* Contact Seller via Email or Phone
+* Contact Us Form
+* Responsive UI for Desktop and Mobile
+* Admin/Seller Management Panel
 
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Usage](#usage)
-- [Database](#database)
-- [Folder Structure](#folder-structure)
----
+## 🛠️ Tech Stack
 
-## Features
+* **Frontend:** HTML, CSS, Bootstrap, Razor Views
+* **Backend:** ASP.NET MVC (C#)
+* **Database:** SQL Server
+* **Tools:** Visual Studio, SSMS
 
-- User authentication and authorization (Student login/signup).  
-- Add, update, and delete **product listings**.  
-- Support for **Digital and Non-Digital Products**:
-  - **Digital products** (e.g., notes, PDFs) have **price = 0** and can be downloaded directly.  
-  - **Non-digital products** (e.g., stationery, books) have a regular price and can be traded or purchased.  
-- View product listings with search and filter options.  
-- **Contact Us page** for users to send messages or queries:
-  - Users can submit name, email, subject, and message.  
-- Seller panel to manage users, products.  
-- Option to contact seller via email or contact no.  
-- Responsive design for desktop and mobile.  
+## 📦 Product Types
 
----
+### Digital Products
 
-## Tech Stack
+* Notes, PDFs, Study Materials
+* Free Download Support
+* Price = 0
 
-- **Frontend:** HTML, CSS, Bootstrap, Razor Views  
-- **Backend:** ASP.NET MVC (C#)  
-- **Database:** SQL Server  
-- **Tools:** Visual Studio, SQL Server Management Studio  
+### Non-Digital Products
 
----
-### Usage
+* Books, Stationery, Electronics
+* Buy/Sell within Campus
+* Custom Pricing
 
-Signup/Login as a student.
+## 🚀 How It Works
 
-Browse products by category or search keywords.
+1. Register/Login as a Student
+2. Browse Available Products
+3. Search or Filter Listings
+4. Add Your Own Products
+5. Contact Sellers Directly
+6. Download Digital Resources or Purchase Physical Items
 
-Add products you want to sell:
+## 🗄️ Database Modules
 
-For digital products, upload files (PDF, notes, etc.) and set price = 0.
+* Users
+* Categories
+* Products
+* Contact Messages
+* Orders (Optional)
 
-For non-digital products, set regular price and upload images.
+## 📁 Project Structure
 
-Edit/Delete your own listings.
-
-Contact Us: Navigate to the Contact page to send messages to admin.
-
-Seller can view all users, products, and contact messages from the Panel.
-
-Digital products can be downloaded directly, while non-digital products follow normal trade or offline payment process.
-
-### Database
-
-Use SQL Server or MySQL to store user, product, and contact data.
-
-Sample tables:
-
-Users
-
-Id
-
-Name
-
-Email
-
-PasswordHash
-
-Role
-
-Categories
-
-Id
-
-Name
-
-Products
-
-Id
-
-Title
-
-Description
-
-Price (0 for digital products)
-
-IsDigital (Boolean)
-
-FileUrl (for digital products)
-
-ImageUrl (for non-digital products)
-
-UserId (seller)
-
-CategoryId
-
-Orders (if implemented)
-
-Id
-
-ProductId
-
-BuyerId
-
-Amount
-
-Status
-
-ContactMessages
-
-Id
-
-Name
-
-Email
-
-Subject
-
-Message
-
-CreatedAt (timestamp)
----
-
-### Folder Structure
+```text
 StudentMarketplace/
-│
-├─ Controllers/          # MVC controllers
-├─ Models/               # C# models
-├─ Views/                # Razor views
-├─ Scripts/              # JavaScript files
-├─ Content/              # CSS, images
-├─ App_Data/             # Database files if local
-├─ Web.config            # Configuration file
-└─ README.md
+├── Controllers/
+├── Models/
+├── Views/
+├── Scripts/
+├── Content/
+├── App_Data/
+├── Web.config
+└── README.md
+```
 
+## 🎯 Objective
 
+To provide students with a secure and convenient platform for exchanging academic resources and second-hand products within their community.
