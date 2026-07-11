@@ -1,58 +1,41 @@
 # 🎓 Student Marketplace
 
-A web-based marketplace built with **ASP.NET MVC** that enables students to buy, sell, and exchange products within their campus community.
+A web application built using **ASP.NET MVC** where students can buy, sell, and share products within their college community. The project was created to make it easier for students to exchange study materials and second-hand items.
 
-## ✨ Features
+## Features
 
-* Student Registration & Login
-* Buy, Sell, and Manage Product Listings
-* Support for Digital & Non-Digital Products
-* Product Search and Filtering
-* Seller Dashboard
-* Contact Seller via Email or Phone
-* Contact Us Form
-* Responsive UI for Desktop and Mobile
-* Admin/Seller Management Panel
+- Student Registration & Login
+- Add, Edit, and Delete Product Listings
+- Browse Products
+- Digital and Physical Products
+- Seller Dashboard
+- Contact Seller
+- Contact Us Page
+- Responsive Design
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-* **Frontend:** HTML, CSS, Bootstrap, Razor Views
-* **Backend:** ASP.NET MVC (C#)
-* **Database:** SQL Server
-* **Tools:** Visual Studio, SSMS
+- ASP.NET MVC (C#)
+- HTML
+- CSS
+- Bootstrap
+- SQL Server
+- Visual Studio
 
-## 📦 Product Types
+## Product Categories
 
-### Digital Products
+### Digital
+- Notes
+- PDFs
+- Study Materials
 
-* Notes, PDFs, Study Materials
-* Free Download Support
-* Price = 0
+### Physical
+- Books
+- Stationery
+- Electronics
+- Other Student Essentials
 
-### Non-Digital Products
-
-* Books, Stationery, Electronics
-* Buy/Sell within Campus
-* Custom Pricing
-
-## 🚀 How It Works
-
-1. Register/Login as a Student
-2. Browse Available Products
-3. Search or Filter Listings
-4. Add Your Own Products
-5. Contact Sellers Directly
-6. Download Digital Resources or Purchase Physical Items
-
-## 🗄️ Database Modules
-
-* Users
-* Categories
-* Products
-* Contact Messages
-* Orders (Optional)
-
-## 📁 Project Structure
+## Project Structure
 
 ```text
 StudentMarketplace/
@@ -62,10 +45,9 @@ StudentMarketplace/
 ├── Scripts/
 ├── Content/
 ├── App_Data/
-├── Web.config
-└── README.md
+└── Web.config
 ```
 
-## 🎯 Objective
+## Purpose
 
-To provide students with a secure and convenient platform for exchanging academic resources and second-hand products within their community.
+The goal of this project is to provide a simple platform where students can buy, sell, and share academic resources and used items with other students.
