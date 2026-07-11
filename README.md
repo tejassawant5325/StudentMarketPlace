@@ -50,17 +50,21 @@ StudentMarketplace/
 
 ## SCREENSHOT OF STUDENTMARKETPLACE
 
+
 * Homepage
   
 <img width="1600" height="742" alt="WhatsApp Image 2026-07-10 at 10 27 19 PM" src="https://github.com/user-attachments/assets/77c352dc-ae50-4a3a-a047-8c84f2939497" />
+
 
 * Products
   
 <img width="1600" height="740" alt="WhatsApp Image 2026-07-10 at 10 27 33 PM" src="https://github.com/user-attachments/assets/0724c84a-6762-4605-9a42-fbe89bf37672" />
 
+
 * Add product
   
 <img width="1600" height="744" alt="WhatsApp Image 2026-07-10 at 10 27 51 PM" src="https://github.com/user-attachments/assets/9f865d3b-b58b-4a19-8bbd-db44b04d1fdb" />
+
 
 * Payment confirmation
   
